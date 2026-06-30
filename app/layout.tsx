@@ -8,6 +8,7 @@ import { Space_Grotesk } from "next/font/google";
 import GridPattern from "@/components/magicui/animated-grid-pattern";
 import { Analytics } from "@vercel/analytics/next";
 import Clouds from "@/components/ui/Clouds";
+import { hero, site } from "@/constants";
 
 
 const Glancyr = localFont({
@@ -29,33 +30,26 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Shawn.",
-  description: "I dont even know man",
-  metadataBase: new URL('https://www.zzzzshawn.cloud/'),
-  authors: [{ name: "Shawn." }],
+  title: site.title,
+  description: site.description,
+  metadataBase: new URL(site.url),
+  authors: [{ name: hero.name }],
   keywords: [
+    "Variz",
+    "automation engineer",
+    "n8n workflows",
+    "AI automation",
+    "Chrome extensions",
+    "workflow automation",
+    "no-code automation",
+    "LLM pipelines",
     "portfolio",
-    "portfolio website",
-    "minimal portfolio",
-    "animated portfolio",
-    "sexy portfolio design",
-    "Framer Motion portfolio",
-    "minimalist web portfolio",
-    "animated portfolio website",
-    "modern web design portfolio",
-    "clean and minimal portfolio",
-    "smooth animations portfolio",
-    "portfolio with animations",
-    "minimal design portfolio",
-    "modern portfolio website",
-    "Framer Motion animations",
-    "elegant portfolio design",
-    "interactive portfolio website",
-    "minimal interactive portfolio"
+    "Chandigarh University",
+    "Next.js portfolio",
   ],
-  creator: "Shawn.",
-  publisher: "Shawn",
-  category: "Creative Portfolio",
+  creator: hero.name,
+  publisher: hero.name,
+  category: "Automation Engineering Portfolio",
   robots: {
     index: true,
     follow: true,
@@ -66,29 +60,29 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "en_US",
-    url: "https://www.zzzzshawn.cloud/",
-    title: "Shawn.",
-    description: "I dont even know man",
+    locale: "en_IN",
+    url: site.url,
+    title: site.title,
+    description: site.description,
     images: [
       {
-        url: "/assets/shawn.png",
+        url: "/assets/pfp.jpg",
         width: 1200,
         height: 630,
-        alt: "Shawn.",
+        alt: `${hero.name} — ${hero.role}`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shawn.",
-    description: "I dont even know man",
-    images: ["/assets/shawn.png"],
-    creator: "@zzzzshawn",
-    site: "@zzzzshawn",
+    title: site.title,
+    description: site.description,
+    images: ["/assets/pfp.jpg"],
+    creator: site.twitterHandle,
+    site: site.twitterHandle,
   },
   alternates: {
-    canonical: "https://www.zzzzshawn.cloud",
+    canonical: site.url,
   },
   icons: [
     { rel: "icon", url: "/favicon.ico" },

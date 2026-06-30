@@ -3,34 +3,39 @@ import React from "react";
 
 const tools = [
   {
-    title: "VS Code",
-    className: "p-2.5",
-    href: "/icons/vscode.png",
-  },
-  {
-    title: "v0.dev",
-    className: " p-1.5  ",
-    href: "/icons/v0.svg",
-  },
-  {
-    title: "Dia",
+    title: "Antigravity",
     className: "p-2",
-    href: "/icons/dia.svg",
+    href: "/icons/antigravity.svg",
   },
   {
-   title: "Motion",
-   className: "p-2",
-   href: "/icons/motion.svg",
- },
+    title: "Cursor",
+    className: "p-2",
+    href: "/icons/cursor.svg",
+  },
+  {
+    title: "Claude",
+    className: "p-2",
+    href: "/icons/claude.svg",
+  },
   {
     title: "Figma",
     className: "p-2",
     href: "/icons/figma_logo.svg",
   },
   {
-    title: "T3Chat",
-    className: "p-[5px] opacity-80",
-    href: "/icons/t3.svg",
+    title: "Slack",
+    className: "p-2",
+    href: "/icons/slack.svg",
+  },
+  {
+    title: "n8n",
+    className: "p-2",
+    href: "/icons/n8n.svg",
+  },
+  {
+    title: "Meta",
+    className: "p-2",
+    href: "/icons/meta.svg",
   },
 ];
 
@@ -45,7 +50,7 @@ const Tools = () => {
           >
             <Image
               src={item.href}
-              alt="tools"
+              alt={item.title}
               width={20}
               height={20}
               className={` w-full aspect-square ${item.className} `}

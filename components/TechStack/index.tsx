@@ -1,4 +1,4 @@
-import { backEnd, currentlyLearning, frontEnd, services } from "@/constants";
+import { backEnd, automation, frontEnd, services } from "@/constants";
 import React from "react";
 import Badge from "../ui/badge";
 
@@ -33,7 +33,7 @@ const Techstack = () => {
           </div>
         </div>
         <div className=" flex flex-col transition-all duration-500 rounded-lg gap-1  p-1 text-md">
-          <p className="text-white dark:text-dark-1 text-sm">Db & Services:</p>
+          <p className="text-white dark:text-dark-1 text-sm">DB & Services:</p>
           <div className=" flex flex-wrap gap-1.5">
             {services.map((item) => (
               <Badge key={item}>{item}</Badge>
@@ -42,10 +42,10 @@ const Techstack = () => {
         </div>
         <div className=" flex flex-col transition-all duration-500 rounded-lg gap-1  p-1 text-md">
           <p className="text-white dark:text-dark-1 text-sm">
-            Currently Learning:
+            Automation:
           </p>
           <div className=" flex flex-wrap gap-1.5">
-            {currentlyLearning.map((item) => (
+            {automation.map((item) => (
               <Badge key={item}>{item}</Badge>
             ))}
           </div>

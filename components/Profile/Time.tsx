@@ -1,6 +1,9 @@
 "use client"
 
 import { useState, useEffect } from 'react'
+import { site } from '@/constants'
+
+const TIMEZONE = 'Asia/Kolkata'
 
 export default function Time() {
   const [mounted, setMounted] = useState(false)
@@ -19,18 +22,20 @@ export default function Time() {
   }, [mounted])
 
   const formatDateTime = (date: Date) => {
-    const formattedDate = date.toLocaleDateString('en-US', {
+    const formattedDate = date.toLocaleDateString('en-IN', {
+      timeZone: TIMEZONE,
       month: '2-digit',
       day: '2-digit',
       year: 'numeric'
     })
-    const formattedTime = date.toLocaleTimeString('en-US', {
+    const formattedTime = date.toLocaleTimeString('en-IN', {
+      timeZone: TIMEZONE,
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit',
       hour12: true
     })
-    return `${formattedDate}, ${formattedTime}`
+    return `${formattedDate}, ${formattedTime} · ${site.location}`
   }
 
   return (
@@ -38,7 +43,7 @@ export default function Time() {
       <time
         className="text-[10px] font-light text-zinc-500 font-mono tabular-nums tracking-wider "
         dateTime={mounted ? time.toISOString() : undefined}
-        aria-label="Current time"
+        aria-label="Current time in Chandigarh"
       >
         {mounted ? formatDateTime(time) : '\u2013'}
       </time>
