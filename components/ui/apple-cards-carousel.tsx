@@ -162,24 +162,32 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
 const getCardStyles = (category: string, index: number) => {
   const styles = [
     {
-      bg: "bg-gradient-to-br from-emerald-950 via-emerald-900 to-zinc-950 border-emerald-900/40",
+      background: "radial-gradient(circle at 60% 40%, rgba(16,185,129,0.22), transparent 70%), linear-gradient(135deg, #052c1d, #010a07)",
+      glow: "shadow-[0_0_60px_rgba(16,185,129,0.2)]",
+      borderColor: "border-white/[0.08]",
       accent: "text-emerald-400",
-      btnAccent: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30 hover:bg-emerald-500/30",
+      btnAccent: "bg-emerald-500 text-white shadow-[0_15px_30px_rgba(16,185,129,0.35)] hover:bg-emerald-400 hover:shadow-[0_20px_40px_rgba(16,185,129,0.45)] border border-emerald-400/20",
     },
     {
-      bg: "bg-gradient-to-br from-indigo-950 via-purple-900 to-zinc-950 border-purple-900/40",
+      background: "radial-gradient(circle at 60% 40%, rgba(139,92,246,0.22), transparent 70%), linear-gradient(135deg, #1c1945, #07040e)",
+      glow: "shadow-[0_0_60px_rgba(139,92,246,0.2)]",
+      borderColor: "border-white/[0.08]",
       accent: "text-purple-400",
-      btnAccent: "bg-purple-500/20 text-purple-400 border-purple-500/30 hover:bg-purple-500/30",
+      btnAccent: "bg-purple-600 text-white shadow-[0_15px_30px_rgba(139,92,246,0.35)] hover:bg-purple-500 hover:shadow-[0_20px_40px_rgba(139,92,246,0.45)] border border-purple-400/20",
     },
     {
-      bg: "bg-gradient-to-br from-cyan-950 via-blue-900 to-zinc-950 border-blue-900/40",
-      accent: "text-cyan-400",
-      btnAccent: "bg-cyan-500/20 text-cyan-400 border-cyan-500/30 hover:bg-cyan-500/30",
+      background: "radial-gradient(circle at 60% 40%, rgba(59,130,246,0.22), transparent 70%), linear-gradient(135deg, #0a1835, #020610)",
+      glow: "shadow-[0_0_60px_rgba(59,130,246,0.2)]",
+      borderColor: "border-white/[0.08]",
+      accent: "text-blue-400",
+      btnAccent: "bg-blue-600 text-white shadow-[0_15px_30px_rgba(59,130,246,0.35)] hover:bg-blue-500 hover:shadow-[0_20px_40px_rgba(59,130,246,0.45)] border border-blue-400/20",
     },
     {
-      bg: "bg-gradient-to-br from-rose-950 via-pink-900 to-zinc-950 border-pink-900/40",
+      background: "radial-gradient(circle at 60% 40%, rgba(244,63,94,0.22), transparent 70%), linear-gradient(135deg, #371119, #0b0204)",
+      glow: "shadow-[0_0_60px_rgba(244,63,94,0.2)]",
+      borderColor: "border-white/[0.08]",
       accent: "text-rose-400",
-      btnAccent: "bg-rose-500/20 text-rose-400 border-rose-500/30 hover:bg-rose-500/30",
+      btnAccent: "bg-rose-600 text-white shadow-[0_15px_30px_rgba(244,63,94,0.35)] hover:bg-rose-500 hover:shadow-[0_20px_40px_rgba(244,63,94,0.45)] border border-rose-400/20",
     },
   ];
   return styles[index % styles.length];
@@ -232,65 +240,86 @@ export const Card = ({
     <motion.button
       layoutId={layout ? `card-${card.title}` : undefined}
       onClick={handleOpen}
-      className={`rounded-3xl h-[28rem] z-30 w-72 md:h-[38rem] md:w-[27rem] overflow-hidden flex flex-col items-start justify-start relative transition-all duration-500 group p-1.5 border ${theme.bg} shadow-2xl`}
+      style={{ background: theme.background }}
+      className={`rounded-[32px] h-[35rem] md:h-[48rem] w-[22rem] md:w-[32rem] overflow-hidden flex flex-col items-start justify-start relative transition-all duration-[400ms] ease-[cubic-bezier(0.25,1,0.5,1)] group p-[1.5px] border ${theme.borderColor} hover:-translate-y-2 hover:shadow-[0_30px_70px_rgba(0,0,0,0.45)] select-none`}
     >
-      <div className="size-full rounded-[20px] relative overflow-hidden flex flex-col justify-between p-6 md:p-8">
+      {/* Film Grain Noise Overlay */}
+      <div 
+        className="absolute inset-0 opacity-[0.035] pointer-events-none mix-blend-overlay z-0" 
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+        }}
+      />
+      
+      {/* Dynamic Glow behind device */}
+      <div className={`absolute bottom-[-10%] right-[-10%] w-[80%] h-[60%] rounded-full bg-white/5 filter blur-[80px] pointer-events-none z-0 transition-all duration-[400ms] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-110 ${theme.glow}`} />
+
+      {/* Grid Pattern overlay for texture */}
+      <FlickeringGrid 
+        width={1000} 
+        height={2000} 
+        className="size-full absolute inset-0 z-0 opacity-10 mix-blend-overlay pointer-events-none" 
+      />
+
+      <div className="size-full rounded-[30px] relative overflow-hidden flex flex-col justify-between p-7 md:p-10 z-10">
         
-        {/* Title and Category Section */}
-        <div className="relative z-10 w-full">
+        {/* Title and Category Section (Level 2) */}
+        <div className="relative z-10 w-full text-left">
           <motion.p
             layoutId={layout ? `category-${card.category}` : undefined}
-            className={`text-xs md:text-sm font-semibold uppercase tracking-wider text-left ${theme.accent}`}
+            className={`text-sm md:text-[18px] font-semibold uppercase tracking-widest ${theme.accent}`}
           >
             {card.category}
           </motion.p>
-          <motion.p
+          <motion.h2
             layoutId={layout ? `title-${card.title}` : undefined}
-            className="text-lg md:text-2xl font-bold max-w-xs text-left [text-wrap:balance] font-glancyr700 mt-1 md:mt-2 text-white"
+            className="text-3xl md:text-[58px] leading-[1.05] font-extrabold max-w-sm tracking-tight mt-2 text-white font-glancyr700"
           >
             {card.title.split(" — ")[0] || card.title}
-          </motion.p>
+          </motion.h2>
         </div>
 
-        {/* Mockup Image Layer (Behind the glass card but in front of background) */}
-        <div className="absolute bottom-0 right-[-10%] w-[90%] h-[55%] md:w-[80%] md:h-[50%] z-0 pointer-events-none opacity-40 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 ease-out">
-          <BlurImage
-            src={card.src}
-            alt={card.title}
-            fill
-            className="object-contain object-bottom-right"
-          />
+        {/* Mockup Image Layer (Level 3 - Behind glass card, offset, rotated) */}
+        <div className="absolute bottom-10 right-[-15%] w-[85%] h-[55%] md:w-[75%] md:h-[50%] z-20 pointer-events-none rotate-[3deg] group-hover:rotate-[1deg] group-hover:-translate-y-3 group-hover:scale-[1.03] transition-all duration-[400ms] ease-[cubic-bezier(0.25,1,0.5,1)]">
+          <div className="relative w-full h-full">
+            <BlurImage
+              src={card.src}
+              alt={card.title}
+              fill
+              className="object-contain object-bottom-right"
+            />
+          </div>
         </div>
 
-        {/* Middle Section: Translucent Glass Card (Problem, Solution, Result) */}
+        {/* Middle Section: Floating Glass Card (Level 4 - Overlaps mockup & heading) */}
         {card.problem && card.solution && card.result && (
-          <div className="relative z-10 w-full mt-4 md:mt-6">
-            <div className="backdrop-blur-xl bg-zinc-950/45 border border-white/10 p-4 md:p-5 rounded-2xl space-y-3 shadow-lg">
+          <div className="relative z-30 w-full mt-6 md:mt-8 ml-0 mr-auto transition-all duration-[400ms] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-y-4">
+            <div className="bg-[#141414]/45 backdrop-blur-[28px] border border-white/12 p-5 md:p-6 rounded-[24px] space-y-4 shadow-[0_25px_60px_rgba(0,0,0,0.35)]">
               <div>
-                <p className={`text-[10px] md:text-xs font-bold uppercase tracking-widest ${theme.accent}`}>Problem</p>
-                <p className="text-[11px] md:text-xs text-zinc-300 leading-relaxed mt-0.5">{card.problem}</p>
+                <p className={`text-xs md:text-[16px] font-bold uppercase tracking-widest ${theme.accent}`}>Problem</p>
+                <p className="text-sm md:text-[18px] text-zinc-300 leading-[1.6] mt-1">{card.problem}</p>
               </div>
               <div>
-                <p className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-emerald-400">Solution</p>
-                <p className="text-[11px] md:text-xs text-zinc-300 leading-relaxed mt-0.5">{card.solution}</p>
+                <p className="text-xs md:text-[16px] font-bold uppercase tracking-widest text-emerald-400">Solution</p>
+                <p className="text-sm md:text-[18px] text-zinc-300 leading-[1.6] mt-1">{card.solution}</p>
               </div>
               <div>
-                <p className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-blue-400">Result</p>
-                <p className="text-[11px] md:text-xs text-zinc-100 font-semibold leading-relaxed mt-0.5">{card.result}</p>
+                <p className="text-xs md:text-[16px] font-bold uppercase tracking-widest text-blue-400">Result</p>
+                <p className="text-sm md:text-[18px] text-zinc-100 font-semibold leading-[1.6] mt-1">{card.result}</p>
               </div>
             </div>
           </div>
         )}
 
-        {/* Bottom Section: Tags and Actions */}
-        <div className="relative z-10 w-full mt-auto pt-4 space-y-3">
-          {/* Tags */}
+        {/* Bottom Section: Tags and Actions (Level 5) */}
+        <div className="relative z-40 w-full mt-auto pt-6 space-y-4">
+          {/* Tags (Centered) */}
           {card.tags && card.tags.length > 0 && (
-            <div className="flex flex-wrap gap-1.5 w-full">
+            <div className="flex flex-wrap justify-center gap-3 w-full">
               {card.tags.map((tag, idx) => (
                 <div
                   key={idx}
-                  className="bg-white/5 border border-white/10 text-zinc-300 px-2.5 py-0.5 rounded-full text-[10px] md:text-xs font-medium"
+                  className="h-10 px-[18px] py-[12px] flex items-center justify-center rounded-[14px] bg-white/[0.08] border border-white/[0.08] backdrop-blur-[10px] text-zinc-300 font-medium text-xs md:text-sm select-none transition-all duration-[400ms] ease-[cubic-bezier(0.25,1,0.5,1)] hover:-translate-y-1 hover:bg-white/[0.15] hover:border-white/20"
                 >
                   {tag}
                 </div>
@@ -298,16 +327,16 @@ export const Card = ({
             </div>
           )}
 
-          {/* Action Buttons */}
-          <div className="flex items-center gap-2">
+          {/* Action Buttons (Left Aligned) */}
+          <div className="flex items-center justify-start gap-3 w-full">
             {card.github && (
               <Link
                 href={card.github}
                 target="_blank"
                 onClick={(event) => event.stopPropagation()}
-                className="flex items-center gap-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-lg bg-zinc-900 border border-white/10 text-white hover:bg-zinc-800 transition-colors"
+                className="flex items-center gap-2 text-xs md:text-sm font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl bg-white/[0.08] hover:bg-white/[0.15] border border-white/12 text-white backdrop-blur-[10px] shadow-[0_10px_30px_rgba(0,0,0,0.18)] transition-all duration-[400ms] ease-[cubic-bezier(0.25,1,0.5,1)] hover:-translate-y-0.5"
               >
-                <GitHubLogoIcon className="size-3.5" />
+                <GitHubLogoIcon className="size-4" />
                 GitHub
               </Link>
             )}
@@ -316,13 +345,14 @@ export const Card = ({
                 href={card.demo}
                 target="_blank"
                 onClick={(event) => event.stopPropagation()}
-                className={`text-[10px] md:text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-lg border ${theme.btnAccent} transition-all`}
+                className={`text-xs md:text-sm font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl transition-all duration-[400ms] ease-[cubic-bezier(0.25,1,0.5,1)] hover:-translate-y-0.5 ${theme.btnAccent}`}
               >
                 Live Demo
               </Link>
             )}
           </div>
         </div>
+
       </div>
     </motion.button>
   );
