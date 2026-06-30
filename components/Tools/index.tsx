@@ -23,11 +23,6 @@ const tools = [
     href: "/icons/figma_logo.svg",
   },
   {
-    title: "Slack",
-    className: "p-2",
-    href: "/icons/slack.svg",
-  },
-  {
     title: "n8n",
     className: "p-2",
     href: "/icons/n8n.svg",

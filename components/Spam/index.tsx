@@ -1,7 +1,7 @@
 import React from "react";
 import Tools from "../Tools";
 import Tooltext from "./Tool-text";
-import Nasa from "./Nasa";
+import Github from "./Github";
 import Track from "./Track";
 import Wavs from "./Wavs";
 import Naruto from "./Naruto";
@@ -15,7 +15,7 @@ const Spam = () => {
       <div className=" sm:col-start-2 sm:col-end-4  sm:row-start-1 sm:row-end-3">
         <Tooltext />
       </div>
-      <Nasa />
+      <Github />
       <Wavs/>
       <Track />
       <Naruto/>
